@@ -1,0 +1,12 @@
+.input {
+  font-family: inherit;
+  display: flex;
+  margin: auto;
+  font-size: clamp(20px, 5vw, 28px);
+  text-align: center;
+  block-size: 60px;
+  border: 2px solid black;
+  border-radius: 4px;
+  width: calc(100% - 60px);
+  box-shadow: 0 5px 50px rgb(32 35 41 / 25%);
+}

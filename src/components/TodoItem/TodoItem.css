@@ -1,0 +1,23 @@
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #cfcfcf;
+
+  /* margin: auto; */
+  border-radius: 4px;
+  padding-inline: 16px;
+  position: relative;
+}
+
+.todo-item p {
+  flex: 1;
+}
+
+.icon-remove:hover {
+  color: red;
+}
+
+.todo-checked {
+  text-decoration: line-through;
+}

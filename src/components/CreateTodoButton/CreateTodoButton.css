@@ -1,0 +1,19 @@
+.btn {
+  border: none;
+  display: flex;
+  position: fixed;
+  background-color: transparent;
+  bottom: 20px;
+  left: calc(50% - 16px);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-icon {
+  background-color: rgb(104 104 138);
+  border-radius: 50%;
+  width: auto;
+  height: 50px;
+}
