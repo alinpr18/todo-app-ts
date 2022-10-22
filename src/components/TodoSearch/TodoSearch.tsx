@@ -1,14 +1,12 @@
-import { useState } from "react"
+import { useContext } from "react"
+import { TodoContext } from "../../context/TodoContext"
 import "./TodoSearch.css"
 
-interface Props {
-  searchValue: string
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>
-}
+function TodoSearch() {
+  const appContext = useContext(TodoContext)
 
-function TodoSearch({ searchValue, setSearchValue }: Props) {
   const onSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value)
+    appContext?.setSearchValue(e.target.value)
   }
 
   return (
@@ -16,7 +14,7 @@ function TodoSearch({ searchValue, setSearchValue }: Props) {
       className="input"
       type="text"
       placeholder="Buscar aqui"
-      value={searchValue}
+      value={appContext?.searchValue}
       onChange={onSearchValueChange}
     />
   )

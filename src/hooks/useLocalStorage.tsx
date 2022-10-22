@@ -24,12 +24,13 @@ function useLocalStorage(itemName: string, initialValue: Todos) {
         }
 
         setItem(parsedItem)
-        setLoading(false)
       } catch (error) {
         setError(true)
         console.log(error)
+      } finally {
+        setLoading(false)
       }
-    }, 2000)
+    }, 1000)
   }, [])
 
   const saveItem = (newItem: Todos) => {

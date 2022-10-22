@@ -1,4 +1,6 @@
 :root {
   font-family: system-ui;
   font-size: clamp(16px, 5vw, 24px);
+  max-inline-size: 500px;
+  margin: auto;
 }
