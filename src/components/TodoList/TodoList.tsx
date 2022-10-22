@@ -6,7 +6,7 @@ interface Props {
 
 function TodoList({ children }: Props) {
   return (
-    <section>
+    <section className="container">
       <ul className="todo-list">{children}</ul>
     </section>
   )

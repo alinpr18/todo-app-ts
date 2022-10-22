@@ -1,6 +1,17 @@
+.container {
+  max-height: 400px;
+  overflow-y: scroll;
+  margin: 1rem;
+  overflow: overlay;
+}
+
 .todo-list {
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }

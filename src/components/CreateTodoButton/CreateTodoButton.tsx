@@ -1,9 +1,13 @@
 import "./CreateTodoButton.css"
 import { GrAddCircle } from "react-icons/gr"
 
-function CreateTodoButton() {
+interface Props {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function CreateTodoButton({ setOpenModal }: Props) {
   const onClickButton = () => {
-    alert("Hello world")
+    setOpenModal((open) => !open)
   }
 
   return (

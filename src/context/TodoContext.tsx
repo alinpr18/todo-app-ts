@@ -12,6 +12,9 @@ interface TodoContextInterface {
   searchedTodos: Todos
   completeTodo: (text: string) => void
   deleteTodo: (text: string) => void
+  openModal: boolean
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+  addTodo: (text: string) => void
 }
 
 const TodoContext = createContext<TodoContextInterface | null>(null)
@@ -28,6 +31,7 @@ function TodoProvider({ children }: Props) {
     error,
   } = useLocalStorage("TODOS_V1", [])
   const [searchValue, setSearchValue] = useState("")
+  const [openModal, setOpenModal] = useState(false)
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length
   const totalTodos = todos.length
@@ -62,6 +66,16 @@ function TodoProvider({ children }: Props) {
     saveTodos(newTodos)
   }
 
+  const addTodo = (text: string) => {
+    const newTodos = [...todos]
+    newTodos.push({
+      completed: false,
+      text: text,
+    })
+
+    saveTodos(newTodos)
+  }
+
   return (
     <TodoContext.Provider
       value={{
@@ -74,6 +88,9 @@ function TodoProvider({ children }: Props) {
         searchedTodos,
         completeTodo,
         deleteTodo,
+        openModal,
+        setOpenModal,
+        addTodo,
       }}
     >
       {children}

@@ -1,36 +1,29 @@
 import { useEffect, useState } from "react"
 import { Todos } from "../types"
 
-// interface Props {
-//   itemName: string
-//   initialValue: undefined
-// }
-
 function useLocalStorage(itemName: string, initialValue: Todos) {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [item, setItem] = useState(initialValue)
 
   useEffect(() => {
-    setTimeout(() => {
-      try {
-        const localStorageItem = localStorage.getItem(itemName)
-        let parsedItem: Todos = []
+    try {
+      const localStorageItem = localStorage.getItem(itemName)
+      let parsedItem: Todos = []
 
-        if (!localStorageItem) {
-          localStorage.setItem(itemName, JSON.stringify(initialValue))
-        } else {
-          parsedItem = JSON.parse(localStorageItem)
-        }
-
-        setItem(parsedItem)
-      } catch (error) {
-        setError(true)
-        console.log(error)
-      } finally {
-        setLoading(false)
+      if (!localStorageItem) {
+        localStorage.setItem(itemName, JSON.stringify(initialValue))
+      } else {
+        parsedItem = JSON.parse(localStorageItem)
       }
-    }, 1000)
+
+      setItem(parsedItem)
+    } catch (error) {
+      setError(true)
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
   const saveItem = (newItem: Todos) => {

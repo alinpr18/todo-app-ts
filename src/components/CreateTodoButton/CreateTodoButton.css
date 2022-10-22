@@ -5,6 +5,8 @@
   background-color: transparent;
   bottom: 20px;
   left: calc(50% - 16px);
+  padding: 0;
+  z-index: 1;
 }
 
 .btn:hover {

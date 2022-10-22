@@ -1,0 +1,8 @@
+.modal-container {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  background: rgb(32 35 41 / 80%);
+  color: white;
+}
