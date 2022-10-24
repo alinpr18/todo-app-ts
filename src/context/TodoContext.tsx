@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, SetStateAction, useState } from "react"
 import useLocalStorage from "../hooks/useLocalStorage"
 import { Todos } from "../types"
 
@@ -17,7 +17,32 @@ interface TodoContextInterface {
   addTodo: (text: string) => void
 }
 
-const TodoContext = createContext<TodoContextInterface | null>(null)
+const TodoProviderDefault: TodoContextInterface = {
+  error: false,
+  loading: false,
+  totalTodos: 0,
+  completedTodos: 0,
+  searchValue: "",
+  setSearchValue: function (value: SetStateAction<string>): void {
+    throw new Error("Function not implemented.")
+  },
+  searchedTodos: [],
+  completeTodo: function (text: string): void {
+    throw new Error("Function not implemented.")
+  },
+  deleteTodo: function (text: string): void {
+    throw new Error("Function not implemented.")
+  },
+  openModal: false,
+  setOpenModal: function (value: SetStateAction<boolean>): void {
+    throw new Error("Function not implemented.")
+  },
+  addTodo: function (text: string): void {
+    throw new Error("Function not implemented.")
+  },
+}
+
+const TodoContext = createContext<TodoContextInterface>(TodoProviderDefault)
 
 interface Props {
   children: React.ReactNode

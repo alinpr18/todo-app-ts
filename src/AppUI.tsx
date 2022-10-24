@@ -13,37 +13,45 @@ import TodosError from "./components/TodosError/TodosError"
 import EmptyTodos from "./components/EmptyTodos/EmptyTodos"
 
 function AppUI() {
-  const appContext = useContext(TodoContext)
+  const {
+    error,
+    loading,
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+    openModal,
+    setOpenModal,
+  } = useContext(TodoContext)
 
   return (
     <>
       <TodoCounter />
       <TodoSearch />
       <TodoList>
-        {appContext?.error ? (
+        {error ? (
           <TodosError />
-        ) : appContext?.loading ? (
+        ) : loading ? (
           <TodosLoading />
-        ) : !appContext?.searchedTodos.length ? (
+        ) : !searchedTodos.length ? (
           <EmptyTodos />
         ) : (
-          appContext?.searchedTodos.map((todo) => (
+          searchedTodos.map((todo) => (
             <TodoItem
               key={uuid()}
               text={todo.text}
               completed={todo.completed}
-              onComplete={() => appContext?.completeTodo(todo.text)}
-              onDelete={() => appContext?.deleteTodo(todo.text)}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
             />
           ))
         )}
       </TodoList>
-      {appContext?.openModal && (
+      {openModal && (
         <Modal>
           <TodoForm />
         </Modal>
       )}
-      <CreateTodoButton setOpenModal={appContext?.setOpenModal} />
+      <CreateTodoButton setOpenModal={setOpenModal} />
     </>
   )
 }
