@@ -1,26 +1,21 @@
-import { useContext } from "react"
-import { TodoContext } from "../../context/TodoContext"
 import "./TodoCounter.css"
+interface Props {
+  totalTodos: number
+  completedTodos: number
+}
 
-function TodoCounter() {
-  const appContext = useContext(TodoContext)
-
+export function TodoCounter({ totalTodos, completedTodos }: Props) {
   return (
     <>
-      {(appContext?.totalTodos && appContext?.completedTodos) === 0 ? (
+      {(totalTodos && completedTodos) === 0 ? (
         <h2 className="title">No has realizado ningún ToDo</h2>
-      ) : appContext?.totalTodos &&
-        appContext.completedTodos != 0 &&
-        appContext.totalTodos === appContext.completedTodos ? (
+      ) : totalTodos && completedTodos != 0 && totalTodos === completedTodos ? (
         <h2 className="title">Has completado todos los Todo</h2>
       ) : (
         <h2 className="title">
-          Has completado {appContext?.completedTodos} de{" "}
-          {appContext?.totalTodos} ToDo
+          Has completado {completedTodos} de {totalTodos} ToDo
         </h2>
       )}
     </>
   )
 }
-
-export default TodoCounter

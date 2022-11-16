@@ -1,17 +1,20 @@
-import React, { useContext, useState } from "react"
-import { TodoContext } from "../../context/TodoContext"
+import { useState } from "react"
 import "./TodoForm.css"
 
-function TodoForm() {
-  const appContext = useContext(TodoContext)
+interface Props {
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+  addTodo: (text: string) => void
+}
+
+export function TodoForm({ setOpenModal, addTodo }: Props) {
   const [newTodoValue, setNewTodoValue] = useState("")
 
   const onCancel = () => {
-    appContext?.setOpenModal(false)
+    setOpenModal(false)
   }
 
   const onAdd = () => {
-    appContext?.addTodo(newTodoValue)
+    addTodo(newTodoValue)
   }
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewTodoValue(e.target.value)
@@ -41,5 +44,3 @@ function TodoForm() {
     </form>
   )
 }
-
-export default TodoForm
