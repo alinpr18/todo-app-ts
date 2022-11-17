@@ -1,0 +1,20 @@
+.alert-bg {
+  background-color: #1e1e1f50;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+}
+
+.alert-container {
+  background-color: #1e1e1f;
+  color: whitesmoke;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  padding-block: 20px;
+}
+
+.alert-container button {
+  font-size: clamp(10px, 4vw, 20px);
+}

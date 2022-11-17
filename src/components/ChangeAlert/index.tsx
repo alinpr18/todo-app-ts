@@ -1,3 +1,4 @@
+import "./ChangeAlert.css"
 import { withStorageListener } from "./withStorageListener"
 
 type Props = {
@@ -8,10 +9,12 @@ type Props = {
 function ChangeAlert({ show, toggleShow }: Props) {
   if (show) {
     return (
-      <>
-        <p>Hubo cambios</p>
-        <button onClick={() => toggleShow(false)}>volver a cargar</button>
-      </>
+      <div className="alert-bg">
+        <div className="alert-container">
+          <p>Tu información está desactualizada</p>
+          <button onClick={() => toggleShow(false)}>Actualizar</button>
+        </div>
+      </div>
     )
   } else {
     return null

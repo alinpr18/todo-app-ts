@@ -4,8 +4,15 @@ interface Props {
   sincronize: () => void
 }
 
-export function withStorageListener<T>(WrappedComponent: ComponentType<any>) {
-  return function WrappedComponentWithStorageListener({ sincronize }: Props) {
+interface stateProps {
+  show: boolean
+  toggleShow: () => void
+}
+
+export function withStorageListener<T extends Props>(
+  WrappedComponent: ComponentType<stateProps>
+) {
+  return function WrappedComponentWithStorageListener({ sincronize }: T) {
     const [storageChange, setStorageChange] = useState(false)
 
     window.addEventListener("storage", (change) => {
