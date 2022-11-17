@@ -1,4 +1,5 @@
 import uuid from "react-uuid"
+import { ChangeAlertWithStorageListener } from "./components/ChangeAlert"
 import { CreateTodoButton } from "./components/CreateTodoButton/CreateTodoButton"
 import { EmptyTodos } from "./components/EmptyTodos/EmptyTodos"
 import { Modal } from "./components/Modal/Modal"
@@ -26,6 +27,7 @@ function App() {
     setSearchValue,
     searchValue,
     addTodo,
+    sincronizeTodos,
   } = useTodos()
 
   return (
@@ -34,23 +36,25 @@ function App() {
         <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos} />
         <TodoSearch setSearchValue={setSearchValue} searchValue={searchValue} />
       </TodoHeader>
-      <TodoList>
-        {error ? (
-          <TodosError />
-        ) : loading ? (
-          <TodosLoading />
-        ) : !searchedTodos.length ? (
-          <EmptyTodos />
-        ) : (
-          searchedTodos.map((todo) => (
-            <TodoItem
-              key={uuid()}
-              text={todo.text}
-              completed={todo.completed}
-              onComplete={() => completeTodo(todo.text)}
-              onDelete={() => deleteTodo(todo.text)}
-            />
-          ))
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        totalTodos={totalTodos}
+        searchValue={searchValue}
+        onError={() => <TodosError />}
+        onLoading={() => <TodosLoading />}
+        onEmptyTodos={() => <EmptyTodos />}
+        onEmptySearchResult={(text) => <p>No hay resultados para {text}</p>}
+      >
+        {(todo) => (
+          <TodoItem
+            key={uuid()}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
+          />
         )}
       </TodoList>
       {openModal && (
@@ -59,6 +63,7 @@ function App() {
         </Modal>
       )}
       <CreateTodoButton setOpenModal={setOpenModal} />
+      <ChangeAlertWithStorageListener sincronize={sincronizeTodos} />
     </>
   )
 }

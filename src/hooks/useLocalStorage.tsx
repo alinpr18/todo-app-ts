@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Todos } from "../types"
 
 export function useLocalStorage(itemName: string, initialValue: Todos[]) {
+  const [sync, setSync] = useState(true)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
   const [item, setItem] = useState(initialValue)
@@ -18,13 +19,14 @@ export function useLocalStorage(itemName: string, initialValue: Todos[]) {
       }
 
       setItem(parsedItem)
+      setSync(true)
     } catch (error) {
       setError(true)
       console.log(error)
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [sync])
 
   const saveItem = (newItem: Todos[]) => {
     try {
@@ -37,5 +39,10 @@ export function useLocalStorage(itemName: string, initialValue: Todos[]) {
     }
   }
 
-  return { item, saveItem, loading, error }
+  const sincronize = () => {
+    setLoading(true)
+    setSync(false)
+  }
+
+  return { item, saveItem, loading, error, sincronize }
 }
