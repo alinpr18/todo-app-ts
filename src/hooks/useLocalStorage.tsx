@@ -39,10 +39,10 @@ export function useLocalStorage(itemName: string, initialValue: Todos[]) {
     }
   }
 
-  const sincronize = () => {
+  const synchronize = () => {
     setLoading(true)
     setSync(false)
   }
 
-  return { item, saveItem, loading, error, sincronize }
+  return { item, saveItem, loading, error, synchronize }
 }

@@ -6,7 +6,7 @@ export function useTodos() {
   const {
     item: todos,
     saveItem: saveTodos,
-    sincronize: sincronizeTodos,
+    synchronize: syncTodos,
     loading,
     error,
   } = useLocalStorage("TODOS_V1", [])
@@ -69,6 +69,6 @@ export function useTodos() {
     openModal,
     setOpenModal,
     addTodo,
-    sincronizeTodos,
+    syncTodos,
   }
 }

@@ -1,5 +1,5 @@
 import uuid from "react-uuid"
-import { ChangeAlertWithStorageListener } from "./components/ChangeAlert"
+import { ChangeAlert } from "./components/ChangeAlert"
 import { CreateTodoButton } from "./components/CreateTodoButton/CreateTodoButton"
 import { EmptyTodos } from "./components/EmptyTodos/EmptyTodos"
 import { Modal } from "./components/Modal/Modal"
@@ -27,7 +27,7 @@ function App() {
     setSearchValue,
     searchValue,
     addTodo,
-    sincronizeTodos,
+    syncTodos,
   } = useTodos()
 
   return (
@@ -63,7 +63,7 @@ function App() {
         </Modal>
       )}
       <CreateTodoButton setOpenModal={setOpenModal} />
-      <ChangeAlertWithStorageListener sincronize={sincronizeTodos} />
+      <ChangeAlert sync={syncTodos} />
     </>
   )
 }
