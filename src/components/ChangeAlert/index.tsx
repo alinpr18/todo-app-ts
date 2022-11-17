@@ -6,12 +6,11 @@ type Props = {
 }
 
 function ChangeAlert({ show, toggleShow }: Props) {
-  console.log(toggleShow)
   if (show) {
     return (
       <>
-        <p onClick={() => toggleShow(false)}>Hubo cambios</p>
-        <button>volver a cargar</button>
+        <p>Hubo cambios</p>
+        <button onClick={() => toggleShow(false)}>volver a cargar</button>
       </>
     )
   } else {

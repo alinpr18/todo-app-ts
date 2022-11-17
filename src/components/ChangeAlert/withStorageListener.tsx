@@ -1,10 +1,12 @@
 import { ComponentType, useState } from "react"
 
-export function withStorageListener<T>(WrappedComponent: ComponentType<T>) {
-  return function WrappedComponentWithStorageListener(props: T) {
-    const [storageChange, setStorageChange] = useState(false)
+interface Props {
+  sincronize: () => void
+}
 
-    console.log(props)
+export function withStorageListener<T>(WrappedComponent: ComponentType<any>) {
+  return function WrappedComponentWithStorageListener({ sincronize }: Props) {
+    const [storageChange, setStorageChange] = useState(false)
 
     window.addEventListener("storage", (change) => {
       if (change.key === "TODOS_V1") {
@@ -14,17 +16,11 @@ export function withStorageListener<T>(WrappedComponent: ComponentType<T>) {
     })
 
     const toggleShow = () => {
-      // console.log(props.sincronize())
-      props.sincronize()
+      sincronize()
       setStorageChange(false)
+      console.log("cliccc")
     }
 
-    return (
-      <WrappedComponent
-        {...props}
-        show={storageChange}
-        toggleShow={toggleShow}
-      />
-    )
+    return <WrappedComponent show={storageChange} toggleShow={toggleShow} />
   }
 }
